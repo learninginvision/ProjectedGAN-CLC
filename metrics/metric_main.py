@@ -16,8 +16,6 @@ from . import precision_recall
 from . import perceptual_path_length
 from . import inception_score
 from . import equivariance
-from . import frechet_inception_distance_diff
-from . import frechet_inception_distance_all
 #----------------------------------------------------------------------------
 
 _metric_dict = dict() # name => fn
@@ -85,13 +83,6 @@ def fid50k_full(opts):
     return dict(fid50k_full=fid)
 
 @register_metric
-def diff50k_full(opts):
-    opts.dataset_kwargs.update(max_size=None, xflip=False)
-    fid = frechet_inception_distance_diff.compute_diff(opts, max_real=None, num_gen=50000)
-    return dict(diff50k_full=fid)
-
-
-@register_metric
 def fid10k_full(opts):
     opts.dataset_kwargs.update(max_size=None, xflip=False)
     fid = frechet_inception_distance.compute_fid(opts, max_real=None, num_gen=10000)
@@ -157,9 +148,3 @@ def is50k(opts):
     opts.dataset_kwargs.update(max_size=None, xflip=False)
     mean, std = inception_score.compute_is(opts, num_gen=50000, num_splits=10)
     return dict(is50k_mean=mean, is50k_std=std)
-
-@register_metric
-def fid1k_full_save(opts):
-    opts.dataset_kwargs.update(max_size=None, xflip=False)
-    fid = frechet_inception_distance_all.compute_fid(opts, max_real=None, num_gen=1000)
-    return dict(fid10k_full=fid)

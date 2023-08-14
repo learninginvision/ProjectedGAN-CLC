@@ -52,16 +52,6 @@ class Transpose(nn.Module):
         x = x.transpose(self.dim0, self.dim1)
         return x.contiguous()
 
-def remask(x,ids_restore):
-    mask_tokens = torch.randn(1,1,x.shape[-1],device=x.device) * torch.sqrt(x.std()) + x.mean() 
-    mask_tokens = mask_tokens.repeat(x.shape[0], ids_restore.shape[1] + 1 - x.shape[1], 1)
-    # print(mask_tokens.shape,x.shape)
-    x_ = torch.cat([x, mask_tokens], dim=1)  # no cls token
-    # x_ = torch.gather(x_, dim=1, index=ids_restore.unsqueeze(-1).repeat(1, 1, x.shape[2]))  # unshuffle
-    x_ = torch.gather(x_[:,1:,:], dim=1, index=ids_restore.unsqueeze(-1).repeat(1, 1, x.shape[2]))  # unshuffle
-
-    x = torch.cat([x[:, :1, :], x_], dim=1)  # append cls token
-    return x
 
 def forward_vit(pretrained, x):
     b, c, h, w = x.shape
@@ -73,12 +63,6 @@ def forward_vit(pretrained, x):
     layer_2 = pretrained.activations["2"]
     layer_3 = pretrained.activations["3"]
     layer_4 = pretrained.activations["4"]
-    # layer_1 = nn.BatchNorm2d()
-    # layer_1 = remask(layer_1,ids_restore)
-    
-    # layer_2 = remask(layer_2,ids_restore)
-    # layer_3 = remask(layer_3,ids_restore)
-    # layer_4 = remask(layer_4,ids_restore)
 
     layer_1 = pretrained.layer1[0:2](layer_1)
     layer_2 = pretrained.layer2[0:2](layer_2)
@@ -172,37 +156,6 @@ def _resize_pos_embed(self, posemb, gs_h, gs_w):
 
     return posemb
 
-def random_masking(x, mask_ratio):
-    """
-    Perform per-sample random masking by per-sample shuffling.
-    Per-sample shuffling is done by argsort random noise.
-    x: [N, L, D], sequence
-    """
-    N, L, D = x.shape  # batch, length, dim
-    len_keep = int(L * (1 - mask_ratio))
-    
-    noise = torch.rand(N, L, device=x.device)  # noise in [0, 1]
-    
-    # sort noise for each sample
-    ids_shuffle = torch.argsort(noise, dim=1)  # ascend: small is keep, large is remove
-    ids_restore = torch.argsort(ids_shuffle, dim=1)
-
-    # keep the first subset
-    ids_keep = ids_shuffle[:, :len_keep]
-    x_masked = torch.gather(x, dim=1, index=ids_keep.unsqueeze(-1).repeat(1, 1, D))
-
-    # id_re = torch.argsort(ids_keep, dim=1)
-    # ids_re = torch.argsort(id_re, dim=1)
-    # x_masked = torch.gather(x_masked, dim=1, index=id_re.unsqueeze(-1).repeat(1, 1, D))
-
-    # generate the binary mask: 0 is keep, 1 is remove
-    # mask = torch.ones([N, L], device=x.device)
-    mask = torch.randn([N, L], device=x.device)
-    mask[:, :len_keep] = 0
-    # unshuffle to get the binary mask
-    mask = torch.gather(mask, dim=1, index=ids_restore)
-
-    return x_masked, mask, ids_restore
 
 def forward_flex(self, x):
     b, c, h, w = x.shape
@@ -236,10 +189,6 @@ def forward_flex(self, x):
 
     x = x + pos_embed
     x = self.pos_drop(x)
-
-    # x_masked, mask, ids_restore = random_masking(x[:,1:,:],0.05)
-    # x = torch.cat([x[:,0:1,:],x_masked],dim=1)
-
 
     for blk in self.blocks:
         x = blk(x)

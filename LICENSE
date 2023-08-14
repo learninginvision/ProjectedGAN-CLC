@@ -1,6 +1,11 @@
 MIT License
 
-Copyright (c) 2023 ZhaoJW
+Copyright (c) 2023 Jiangwei Zhao, Liang Zhang, Lili Pan, Hongliang Li
+Portions of this software are the copyright of their respective authors:
+- projected-gan (MIT license), Copyright 2021 autonomousvision
+- stylegan-xl (MIT license), Copyright 2022 autonomousvision
+- stylegan2-ada-pytorch (Nvidia Source Code License), Copyright 2021, NVIDIA Corporation.
+- FastGAN-pytorch (GPL 3.0 license), Copyright 2007 Free Software Foundation, Inc. <https://fsf.org/>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

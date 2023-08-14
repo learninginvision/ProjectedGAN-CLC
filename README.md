@@ -51,7 +51,7 @@ time and yields better results on small datasets like Pokemon.
 Samples and metrics are saved in ```outdir```. To monitor the training progress, you can inspect fid50k_full.json or run tensorboard in training-runs.
 
 ## 🔧 Config and Pretrained Models ##
-You can change the config of clc on train.py#L240-L243
+You can change the config of clc on [train.py#L240-L243](https://github.com/learninginvision/ProjectedGAN-CLC/blob/c6ae3c33b25a8abb353567b7bf953486f1195c76/train.py#L240-L243)
 We provide the following pretrained models (pass the url as `PATH_TO_NETWORK_PKL`):
 | Dataset | Loss Weight| Queue Factor | FID | PATH |
 |-|:-:|:-:|:-:|:-|

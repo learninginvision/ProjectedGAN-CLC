@@ -1,4 +1,4 @@
-# 📖 Closed Loop Training for Pre-Trained GANs
+# 📖 Closed Loop Training for Projected GAN
 This repository contains code for our paper 
 >**Closed-Loop Training for Projected GAN**<br>
 >Jiangwei Zhao, Liang Zhang, Lili Pan, Hongliang Li<br>

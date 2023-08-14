@@ -19,7 +19,7 @@ This repository contains code for our paper
 First, you can clone this repo using the command:
 
 ```shell
-git clone https://github.com/learninginvision/InfoUCL
+git clone https://github.com/learninginvision/ProjectedGAN-CLC
 ```
 
 Then, you can create a virtual environment using conda, as follows:

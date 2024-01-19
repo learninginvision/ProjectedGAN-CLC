@@ -80,6 +80,7 @@ python calc_metrics.py --help
 
 *Results on Pokemon, Art-Paint, Flowers, Landscape and Obama.*
 </div>
+
 ## 📜Citation
 ```
 @ARTICLE{10334000,
@@ -92,6 +93,7 @@ python calc_metrics.py --help
   pages={106-110},
   doi={10.1109/LSP.2023.3337711}}
 ```
+
 ## 📜Acknowledgments
 Our codebase build and extends the awesome [StyleGAN2-ADA repo](https://github.com/NVlabs/stylegan2-ada-pytorch), [ProjectedGAN repo](https://github.com/autonomousvision/projected-gan) and [StyleGAN3 repo](https://github.com/NVlabs/stylegan3)
 

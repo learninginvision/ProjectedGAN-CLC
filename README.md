@@ -2,9 +2,9 @@
 This repository contains code for our paper 
 >**Closed-Loop Training for Projected GAN**<br>
 >Jiangwei Zhao, Liang Zhang, Lili Pan, Hongliang Li<br>
->IEEE Signal Processing Letters (submitted)<br>
+>IEEE Signal Processing Letters<br>
 
->**Abstract**:Projected GAN, a pre-trained GAN, has been found to perform well in generating images with only a few training samples. However, it struggles with extended training, which may lead to decreased performance over time. This is because the pre-trained discriminator consistently surpasses the generator, creating an unstable training environment. In this work, we propose a solution to this issue by introducing closed-loop control (CLC) into the dynamics of Projected GAN, stabilizing training and improving generation performance. Our proposed method consistently reduces the Fréchet Inception Distance (FID) of the previous methods; for example, it reduces the FID of Projected GAN by 4.31 on the Obama dataset. Our finding is fundamental and can be used in other pre-trained GANs. The code is available at https://github.com/learninginvision/ProjectedGAN-CLC.
+>**Abstract**:Projected GAN, a pre-trained GAN, has been found to perform well in generating images with only a few training samples. However, it struggles with extended training, which may lead to decreased performance over time. This is because the pre-trained discriminator consistently surpasses the generator, creating an unstable training environment. In this work, we propose a solution to this issue by introducing closed-loop control (CLC) into the dynamics of Projected GAN, stabilizing training, and improving generation performance. Our proposed method consistently reduces the Fréchet Inception Distance (FID) of the previous methods; for example, it reduces the FID of Projected GAN by 4.31 on the Obama dataset. Our finding is fundamental and can be used in other pre-trained GANs.
 <div align=center>
 <img align="middle" width="500" src="media/structure.png">
 </div>
@@ -80,7 +80,18 @@ python calc_metrics.py --help
 
 *Results on Pokemon, Art-Paint, Flowers, Landscape and Obama.*
 </div>
-
+## 📜Citation
+```
+@ARTICLE{10334000,
+  author={Zhao, Jiangwei and Zhang, Liang and Pan, Lili and Li, Hongliang},
+  journal={IEEE Signal Processing Letters}, 
+  title={Closed-Loop Training for Projected GAN}, 
+  year={2024},
+  volume={31},
+  number={},
+  pages={106-110},
+  doi={10.1109/LSP.2023.3337711}}
+```
 ## 📜Acknowledgments
 Our codebase build and extends the awesome [StyleGAN2-ADA repo](https://github.com/NVlabs/stylegan2-ada-pytorch), [ProjectedGAN repo](https://github.com/autonomousvision/projected-gan) and [StyleGAN3 repo](https://github.com/NVlabs/stylegan3)
 
